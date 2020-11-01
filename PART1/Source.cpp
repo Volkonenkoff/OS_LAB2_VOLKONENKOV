@@ -130,8 +130,7 @@ void VA2(SYSTEM_INFO SI)
 	Badr = VirtualAlloc(NULL, SI.dwPageSize, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);
 	if (Badr != NULL)
 	{
-			cout << "Резервирование и передача успешны!" << endl << endl << endl;
-			cout << "Базовый адрес региона 0x" << Badr;
+			cout << "Резервирование и передача успешны! Базовый адрес региона 0x" <<Badr<< endl << endl << endl;
 			cout << "Резервирование в режиме ввода адреса начала региона" << endl;
 			cout << "Введите адрес" << endl;
 			cout << "Ввод>> 0x";
@@ -184,7 +183,7 @@ void VQ()
 			cout << "\tПараметр защиты памяти при первоначальном выделении области: ";
 			PR(MBI.AllocationProtect);
 			cout << "\tРазмер области, начинающейся с базового адреса, в котором все страницы имеют одинаковые атрибуты, в байтах: " <<dec <<(LONGLONG)MBI.RegionSize << endl << endl;
-			cout << "\t\n\tУказатель на базовый адрес региона страниц: ";
+			cout << "\t\n\tСостояние страниц в регионе: ";
 			switch (MBI.State)
 			{
 			case MEM_COMMIT:
