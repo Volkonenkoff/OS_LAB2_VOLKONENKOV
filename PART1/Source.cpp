@@ -123,49 +123,45 @@ void INP()
 void VA2(SYSTEM_INFO SI)
 {
 	
-	LPVOID adr = NULL, Badr = NULL, Badr1 = NULL;
+	LPVOID  Badr = NULL, Badr1 = NULL;
 	cout << "Резервирование и передача в автоматическом режиме:" << endl;
-	cout << "Введите адрес" << endl;
-	cout << "Ввод>> 0x";
-	cin >> adr;
-	if (adr != NULL)
+
+	
+	Badr = VirtualAlloc(NULL, SI.dwPageSize, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+	if (Badr != NULL)
 	{
-		Badr = VirtualAlloc(adr, SI.dwPageSize, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);
-		if (Badr != NULL)
-		{
 			cout << "Резервирование и передача успешны!" << endl << endl << endl;
+			cout << "Базовый адрес региона 0x" << Badr;
 			cout << "Резервирование в режиме ввода адреса начала региона" << endl;
-			Badr1 = VirtualAlloc(Badr, SI.dwPageSize, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);
-			if (Badr1 != NULL) cout << "Резервирование и передача успешны!" << endl << endl << endl;
-			else cout << "BASE_ADR1=NULL. Резервирование и передача не прошли" << endl;
-		}
-		else cout << "BASE_ADR=NULL. Резервирование и передача не прошли" << endl;
+			cout << "Введите адрес" << endl;
+			cout << "Ввод>> 0x";
+			cin >>Badr1;
+			Badr = VirtualAlloc(Badr1, SI.dwPageSize, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+			if (Badr != NULL) cout << "Резервирование и передача успешны! Базовый адрес региона 0x"<<Badr << endl << endl << endl;
+			else cout << "BASE_ADR=NULL. Резервирование и передача не прошли" << endl;
 	}
-	else cout << "ADR=NULL" << endl;
+	else cout << "BASE_ADR=NULL. Резервирование и передача не прошли" << endl;
+	
 	cout << endl << endl;
 }
 
 void VA1(SYSTEM_INFO SI)
 {
-	LPVOID adr = NULL, Badr = NULL, Badr1 = NULL;
+	LPVOID  Badr = NULL, Badr1 = NULL;
 	cout << "Резервирование в автоматическом режиме:" << endl;
-	cout << "Введите адрес"<<endl;
-	cout << "Ввод>> 0x";
-	cin >> adr;
-	if (adr != NULL)
+	Badr = VirtualAlloc(NULL, SI.dwPageSize, MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+	if (Badr != NULL)
 	{
-		Badr = VirtualAlloc(adr, SI.dwPageSize, MEM_RESERVE, PAGE_EXECUTE_READWRITE);
-		if (Badr != NULL)
-		{
-			cout << "Резервирование успешно!" << endl << endl << endl;
+			cout << "Резервирование успешно! Базовый адрес региона 0х"<< Badr << endl << endl << endl;
 			cout << "Резервирование в режиме ввода адреса начала региона" << endl;
-			Badr1 = VirtualAlloc(Badr, SI.dwPageSize, MEM_RESERVE, PAGE_EXECUTE_READWRITE);
-			if (Badr1!=NULL) cout << "Резервирование успешно!" << endl << endl << endl;
-			else cout << "BASE_ADR1=NULL. Резервирование не прошло" << endl;
-		}
-		else cout << "BASE_ADR=NULL. Резервирование не прошло" << endl;
+			cout << "Введите адрес" << endl;
+			cout << "Ввод>> 0x";
+			cin >> Badr1;
+			Badr = VirtualAlloc(Badr1, SI.dwPageSize, MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+			if (Badr!=NULL) cout << "Резервирование успешно! Базовый адрес региона 0x"<<Badr << endl << endl << endl;
+			else cout << "BASE_ADR=NULL. Резервирование не прошло" << endl;
 	}
-	else cout << "ADR=NULL" << endl;
+	else cout << "BASE_ADR=NULL. Резервирование не прошло" << endl;
 	cout << endl << endl;
 }
 
